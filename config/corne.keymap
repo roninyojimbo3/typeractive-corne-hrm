@@ -37,7 +37,7 @@
                 <&kp B>,
                 <&kp O>;
         };
-
+    };
     behaviors {
         hml: homerow_mod_left {
             compatible = "zmk,behavior-hold-tap";
