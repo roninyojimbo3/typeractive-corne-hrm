@@ -26,11 +26,16 @@
             wait-ms = <40>;
             tap-ms = <40>;
             bindings =
-                <&kp N1 &kp N0 &kp DOT>,
-                <&macro_press &kp LSHFT>,
-                <&macro_tap &kp Y>,
-                <&macro_release &kp LSHFT>,
-                <&macro_tap &kp O &kp J &kp I &kp M &kp B &kp O>;
+                <&kp N1>,
+                <&kp N0>,
+                <&kp DOT>,
+                <&kp LS(Y)>,
+                <&kp O>,
+                <&kp J>,
+                <&kp I>,
+                <&kp M>,
+                <&kp B>,
+                <&kp O>;
         };
 
     behaviors {
