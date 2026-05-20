@@ -11,6 +11,14 @@
 
 / {
     macros {
+        cad_macro: cad_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press &kp LCTRL &kp LALT>,
+                <&macro_tap &kp DEL>,
+                <&macro_release &kp LCTRL &kp LALT>;
+        };
         username_macro: username_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -88,7 +96,7 @@
         bt_layer {
             display-name = "BT";
             bindings = <
-                &kp LC(LA(DEL)) &username_macro &none        &none        &none        &none        &none       &none       &none       &none       &none       &none
+                &cad_macro &username_macro &none        &none        &none        &none        &none       &none       &none       &none       &none       &none
                 &none           &none           &none        &none        &none        &none        &bt BT_CLR  &none       &none       &none       &none       &none
                 &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR  &none       &none       &none       &none       &none       &none
                                                           &trans       &trans      &trans       &trans      &trans      &trans
