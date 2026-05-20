@@ -94,16 +94,16 @@
 
                       raise_layer {
 // -----------------------------------------------------------------------------------------
-// |      |     |     |  ↑  |     |     |   |     |     | MS↑ |     | HOME| PGUP |
-// |      |     |  ←  |  ↓  |  →  |     |   | END | MS← | MS↓ | MS→ |     | PGDN |
-// | PREV | PLAY| NEXT| VDN | VUP | MUTE|   | LCK | MCK | RCK |     |     |      |
+// |      |     |     |  ↑  |     |     |   |     | LCK | MS↑ | RCK | HOME| PGUP |
+// |      |     |  ←  |  ↓  |  →  |     |   |     | MS← | MS↓ | MS→ | END | PGDN |
+// | PREV | PLAY| NEXT| VDN | VUP | MUTE|   |     | MB3 | MB4 | MB5 |     |      |
 //                    |     |     |     |   |     |     | BT  |
             display-name = "Nav";
-            bindings = <
-&none      &none       &none       &kp UP       &none        &none        &none        &none          &mmv MOVE_UP   &none          &kp HOME   &kp PG_UP
-&none      &none       &kp LEFT    &kp DOWN     &kp RIGHT    &none        &kp END      &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &none    &kp PG_DN
-&kp C_PREV &kp C_PLAY  &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE   &mkp LCLK    &mkp MCLK      &mkp RCLK      &none          &none      &none
-                                                 &trans       &trans      &trans       &trans         &trans         &mo 3
+                                    bindings = <
+&none      &none       &none       &kp UP       &none        &none        &none      &mkp MB1       &mmv MOVE_UP     &mkp MB2        &kp HOME   &kp PG_UP
+&none      &none       &kp LEFT    &kp DOWN     &kp RIGHT    &none        &none      &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &kp END    &kp PG_DN
+&kp C_PREV &kp C_PLAY  &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE   &none      &mkp MB3       &mkp MB4         &mkp MB5        &none      &none
+                                                 &trans       &trans      &trans     &trans         &trans           &mo 3
             >;
         };
         bt_layer {
