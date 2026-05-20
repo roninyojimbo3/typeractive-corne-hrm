@@ -21,23 +21,18 @@
         };
 
         username_macro: username_macro {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings =
-        <&kp N1>,
-        <&kp N0>,
-        <&kp DOT>,
-        <&macro_press &kp LSHFT>,
-        <&macro_tap &kp Y>,
-        <&macro_release &kp LSHFT>,
-        <&kp O>,
-        <&kp J>,
-        <&kp I>,
-        <&kp M>,
-        <&kp B>,
-        <&kp O>;
-};
-    };
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings =
+                <&kp N1 &kp N0 &kp DOT>,
+                <&macro_press &kp LSHFT>,
+                <&macro_tap &kp Y>,
+                <&macro_release &kp LSHFT>,
+                <&macro_tap &kp O &kp J &kp I &kp M &kp B &kp O>;
+        };
+
     behaviors {
         hml: homerow_mod_left {
             compatible = "zmk,behavior-hold-tap";
