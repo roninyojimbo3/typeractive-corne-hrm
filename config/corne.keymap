@@ -67,29 +67,29 @@
 
                 default_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
+// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | CAPS |
 // | CTRL | A/GU| S/AL| D/CT| F/SH|  G  |   |  H  | J/SH | K/CT| L/AL| ;/GU|  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | DEL  |
-//                    | GUI | NUM | NAV |   | ENT | SPC  | ALT |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
+//                    | NAV | BSP | NUM |   | ENT | SPC  | DEL |
                         display-name = "Base";
                         bindings = <
-&kp TAB    &kp Q       &kp W       &kp E        &kp R        &kp T      &kp Y        &kp U         &kp I        &kp O       &kp P          &kp BSPC
-&kp LCTRL  &hml LGUI A &hml LALT S &hml LCTRL D &hml LSHIFT F &kp G     &kp H        &hmr RSHIFT J &hmr RCTRL K &hmr LALT L &hmr RGUI SEMI &kp SQT
-&kp LSHFT  &kp Z       &kp X       &kp C        &kp V        &kp B      &kp N        &kp M         &kp COMMA    &kp DOT     &kp FSLH       &kp DEL
-                                                 &kp LGUI     &mo 1     &mo 2        &kp RET       &kp SPACE     &kp RALT
+&kp TAB    &kp Q       &kp W       &kp E         &kp R         &kp T      &kp Y        &kp U         &kp I        &kp O        &kp P          &kp CAPS
+&kp LCTRL  &hml LGUI A &hml LALT S &hml LCTRL D &hml LSHIFT F &kp G      &kp H        &hmr RSHIFT J &hmr RCTRL K &hmr LALT L &hmr RGUI SEMI &kp SQT
+&kp LSHFT  &kp Z       &kp X       &kp C         &kp V         &kp B      &kp N        &kp M         &kp COMMA    &kp DOT      &kp FSLH       &kp ESC
+                                                  &mo 2         &kp BSPC   &mo 1        &kp RET       &kp SPACE     &kp DEL
 >;
                 };
                       lower_layer {
 // -----------------------------------------------------------------------------------------
-// | ESC  |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
-// | CAP  | F11 | F12 |     |     |     |   |  -  |  =  |  {  |  }  |  \  |  `   |
-// | SHFT | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 | SHFT |
+// |      |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |  .   |
+// |      | F11 | F12 |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+// |      | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 |      |
 //                    |     |     |     |   |     |     |     |
             display-name = "Num";
             bindings = <
-&kp ESC    &kp N1      &kp N2      &kp N3       &kp N4       &kp N5       &kp N6       &kp N7       &kp N8       &kp N9      &kp N0      &trans
-&kp CAPS   &kp F11     &kp F12     &trans       &trans       &trans       &kp MINUS    &kp EQUAL    &kp LBKT     &kp RBKT    &kp BSLH    &kp GRAVE
-&kp LSHFT  &kp F1      &kp F2      &kp F3       &kp F4       &kp F5       &kp F6       &kp F7       &kp F8       &kp F9      &kp F10     &kp RSHFT
+&trans     &kp N1      &kp N2      &kp N3       &kp N4       &kp N5       &kp N6       &kp N7       &kp N8       &kp N9      &kp N0      &kp DOT
+&trans     &kp F11     &kp F12     &trans       &trans       &trans       &kp MINUS    &kp EQUAL    &kp LBKT     &kp RBKT    &kp BSLH    &kp GRAVE
+&trans     &kp F1      &kp F2      &kp F3       &kp F4       &kp F5       &kp F6       &kp F7       &kp F8       &kp F9      &kp F10     &trans
                                                  &trans       &trans      &trans       &trans       &trans       &trans
             >;
         };
@@ -111,15 +111,15 @@
         bt_layer {
 // -----------------------------------------------------------------------------------------
 // | C+A+D| USER|     |     |     |     |   |     |     |     |     |     |      |
-// |      |     |     |     |     |     |   | CLR |     |     |     |     |      |
-// | BT0  | BT1 | BT2 | BT3 | BT4 | CLR |   |     |     |     |     |     |      |
+// |      | HOME|  SW |  DT |     |     |   | CLR |     |     |     |     |      |
+// |      | MAC | IPRO| IMIN| IPHN| PITY|   |     |     |     |     |     |      |
 //                    |     |     |     |   |     |     |     |
             display-name = "BT";
             bindings = <
 &cad_macro      &username_macro &none        &none        &none        &none        &none       &none       &none       &none       &none       &none
-&none           &none           &none        &none        &none        &none        &bt BT_CLR  &none       &none       &none       &none       &none
-&bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR  &none       &none       &none       &none       &none       &none
-                                                          &trans       &trans      &trans      &trans      &trans      &trans
+&none           &bt BT_SEL 5    &bt BT_SEL 6 &bt BT_SEL 7 &none        &none        &bt BT_CLR  &none       &none       &none       &none       &none
+&none           &bt BT_SEL 0    &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none       &none       &none       &none       &none       &none
+                                                           &trans       &trans      &trans      &trans      &trans      &trans
             >;
         };
 
