@@ -73,12 +73,24 @@
             quick-tap-ms = <175>;
             require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
-        };
+      };
+
+    };
+
+    combos {
+
+        compatible = "zmk,combos";
+
         combo_game_toggle {
-            timeout-ms = <250>;
-            key-positions = <1 2>;
+
+            timeout-ms = <120>;
+
+            key-positions = <37 38>;
+
             bindings = <&tog GAME>;
+
         };
+
     };
 
     keymap {
