@@ -85,7 +85,7 @@
 
             timeout-ms = <120>;
 
-            key-positions = <37 38>;
+           key-positions = <38 39>;
 
             bindings = <&tog GAME>;
 
