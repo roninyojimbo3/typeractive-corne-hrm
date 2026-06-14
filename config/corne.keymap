@@ -75,7 +75,7 @@
             bindings = <&kp>, <&kp>;
         };
         combo_game_toggle {
-            timeout-ms = <150>;
+            timeout-ms = <250>;
             key-positions = <38 39>;
             bindings = <&tog GAME>;
         };
