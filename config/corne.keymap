@@ -102,20 +102,21 @@
 // |  ~   |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  |   \   |
 // |  [   | A/GU| S/AL| D/CT| F/SH|  G  |   |  H  | J/SH | K/CT| L/AL| ;/GU|   '   |
 // |  ]   |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | CAPS  |
-//                   TAB/NAV | BSPC/NUM | DEL/ESC || ENTER | SPACE | SHIFT
+//                  DEL/ESC | TAB/NAV | BSPC/NUM || SPACE | SHIFT | ENTER
 //
 // Thumb notation: tap / hold.
-// TAB/NV = tap Tab, hold Nav.
-// SPC/SHIFT = tap Space, hold Shift.
-// BSP/NM = tap Backspace, hold Num.
 // DEL/ESC = tap Delete, hold Escape.
+// TAB/NAV = tap Tab, hold Nav.
+// BSPC/NUM = tap Backspace, hold Num.
+// SPACE = normal Space.
+// SHIFT = normal Shift.
+// ENTER = normal Enter.
 
 bindings = <
 &kp GRAVE  &kp Q         &kp W       &kp E        &kp R          &kp T           &kp Y        &kp U          &kp I        &kp O       &kp P          &kp BSLH
 &kp LBKT   &hml LGUI A   &hml LALT S &hml LCTRL D &hml LSHIFT F  &kp G           &kp H        &hmr RSHIFT J  &hmr RCTRL K  &hmr LALT L &hmr RGUI SEMI &kp SQT
 &kp RBKT   &kp Z         &kp X       &kp C        &kp V          &kp B           &kp N        &kp M          &kp COMMA    &kp DOT     &kp FSLH       &kp CAPS
-                                     &lt NAV TAB  &lt NUM BSPC  &mt ESC DEL                  &kp RET      &kp SPACE    &kp LSHFT
->;
+                                     &mt ESC DEL  &lt NAV TAB  &lt NUM BSPC                  &kp SPACE    &kp LSHFT    &kp RET
         };
 
         lower_layer {
