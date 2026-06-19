@@ -34,8 +34,7 @@
     flavor = "tap-preferred";
     tapping-term-ms = <170>;
 };
-
-{
+/ {
     behaviors {
         /*
          * Home‑row mods matched to the Typeractive Corne.
