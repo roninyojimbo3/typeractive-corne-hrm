@@ -13,15 +13,14 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // layer indices
-#define BASE     0
-#define NUM      1
-#define NAV      2
-#define BT       3
-// Index 4 is reserved for a game layer if desired
-#define FUN      5
-#define DVORAK   6
-#define COLEMAK  7
-#define WORKMAN  8
+#define BASE 0
+#define NUM  1
+#define NAV  2
+#define BT   3
+#define FUN  5    // function layer
+#define DVORAK 6
+#define COLEMAK 7
+#define WORKMAN 8
 
 /*
  * Maintain the home–row modifier behaviour from the Totem keymap for the
@@ -78,16 +77,19 @@
         // Combos to toggle the Dvorak, Colemak and Workman layouts.  These
         // operate by toggling layers 6–8.  Two adjacent keys on the same row
         // are used for each combo.
-        Dvorak_toggle {
-            bindings = <&tog DVORAK>;
+        
+        Dvorak {
+            bindings = <&tog 6>;
             key-positions = <4 5>;
         };
-        Colemak_toggle {
-            bindings = <&tog COLEMAK>;
+        
+        Colemak {
+            bindings = <&tog 7>;
             key-positions = <14 15>;
         };
-        Workman_toggle {
-            bindings = <&tog WORKMAN>;
+        
+        workman {
+            bindings = <&tog 8>;
             key-positions = <25 26>;
         };
     };
@@ -158,43 +160,43 @@
                                 &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
             >;
         };
-        // Function layer (layer index 5) with F‑keys on top row.  Remaining positions
-        // are transparent so you still fall back to underlying layers.
+        // function layer (index 5) – optional but required because Dvorak/Colemak/Workman follow it
         function {
             bindings = <
-                &trans   &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &trans
-                &trans   &kp F11 &kp F12 &kp F13 &kp F14 &kp F15 &kp F16 &kp F17 &kp F18 &kp F19 &kp F20 &trans
-                &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F11
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans &kp F12
+                                    &trans &trans &trans    &trans &trans &trans
             >;
         };
-        // Dvorak layer.  Centre 10 positions are Dvorak; outer columns pass
-        // through from lower layers.
+        
+        // Dvorak layer (index 6)
         Dvorak {
             bindings = <
-                &trans   &kp APOS    &kp COMMA   &kp DOT     &kp P       &kp Y       &kp F     &kp G     &kp C     &kp R     &kp L     &trans
-                &trans   &hml LEFT_GUI A  &hml LEFT_ALT O  &hml LEFT_CONTROL E  &hml LEFT_SHIFT U  &kp I     &kp D     &hmr RIGHT_SHIFT H   &hmr RIGHT_CONTROL T  &hmr RIGHT_ALT N   &hmr RIGHT_GUI S &trans
-                &trans   &trans    &kp SEMI    &kp Q       &kp J       &kp K       &kp X     &kp B     &kp M     &kp W     &kp V     &kp Z     &trans
-                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &kp APOS &kp COMMA &kp DOT  &kp P  &kp Y  &kp F  &kp G  &kp C  &kp R  &kp L
+                &hml LEFT_GUI A  &hml LEFT_ALT O  &hml LEFT_CONTROL E  &hml LEFT_SHIFT U  &kp I  &kp D  &hmr RIGHT_SHIFT H  &hmr RIGHT_CONTROL T  &hmr RIGHT_ALT N  &hmr RIGHT_GUI S
+                &trans &kp SEMI &kp Q &kp J  &kp K  &kp X  &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
+                                    &trans  &trans  &trans  &trans
             >;
         };
-        // Colemak layer.  Only the central keys change; outer columns remain
-        // transparent.
+        
+        // Colemak layer (index 7)
         Colemak {
             bindings = <
-                &trans   &kp Q       &kp W       &kp F        &kp P        &kp G        &kp J      &kp L      &kp U      &kp Y      &kp SEMI     &trans
-                &trans   &hml LEFT_GUI A  &hml LEFT_CONTROL R  &hml LEFT_ALT S   &hml LEFT_SHIFT T  &kp D      &kp H      &hmr RIGHT_SHIFT N   &hmr RIGHT_CONTROL E   &hmr RIGHT_ALT I   &hmr RIGHT_GUI O   &trans
-                &trans   &trans    &kp Z       &kp X       &kp C        &kp V        &kp B      &kp K      &kp M      &kp COMMA  &kp DOT      &kp FSLH      &trans
-                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &kp Q &kp W &kp F  &kp P  &kp G  &kp J  &kp L  &kp U  &kp Y  &kp SEMI
+                &hml LEFT_GUI A  &hml LEFT_CONTROL R  &hml LEFT_ALT S  &hml LEFT_SHIFT T  &kp D  &kp H  &hmr RIGHT_SHIFT N  &hmr RIGHT_CONTROL E  &hmr RIGHT_ALT I  &hmr RIGHT_GUI O
+                &trans &kp Z &kp X &kp C  &kp V  &kp B  &kp K  &kp M  &kp COMMA &kp DOT  &kp FSLH &trans
+                                    &trans &trans &trans &trans
             >;
         };
-        // Workman layer.  Similar treatment as above.
+        
+        // Workman layer (index 8)
         workman {
             bindings = <
-                &trans   &kp Q       &kp D       &kp R        &kp W        &kp B        &kp J      &kp F      &kp U      &kp P      &kp SEMI    &trans
-                &trans   &hml LEFT_GUI A  &hml LEFT_ALT S   &hml LEFT_CONTROL H  &hml LEFT_SHIFT T  &kp G      &kp Y      &hmr RIGHT_SHIFT N   &hmr RIGHT_CONTROL E   &hmr RIGHT_ALT O   &hmr RIGHT_GUI I   &trans
-                &trans   &trans    &kp Z       &kp X       &kp M        &kp C        &kp V      &kp K      &kp L      &kp COMMA  &kp DOT      &kp FSLH      &trans
-                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &kp Q &kp D &kp R  &kp W  &kp B  &kp J  &kp F  &kp U  &kp P  &kp SEMI
+                &hml LEFT_GUI A  &hml LEFT_ALT S  &hml LEFT_CONTROL H  &hml LEFT_SHIFT T  &kp G  &kp Y  &hml RIGHT_SHIFT N  &hmr RIGHT_CONTROL E  &hmr RIGHT_ALT O  &hmr RIGHT_GUI I
+                &trans &kp Z &kp X &kp M  &kp C  &kp V  &kp K  &kp L  &kp COMMA &kp DOT  &kp FSLH &trans
+                                    &trans &trans &trans &trans
             >;
         };
     };
