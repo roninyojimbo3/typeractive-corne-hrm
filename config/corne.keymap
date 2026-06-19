@@ -13,14 +13,15 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // layer indices
-#define BASE 0
-#define NUM  1
-#define NAV  2
-#define BT   3
-#define FUN  5    // function layer
-#define DVORAK 6
-#define COLEMAK 7
-#define WORKMAN 8
+#define BASE     0
+#define NUM      1
+#define NAV      2
+#define BT       3
+// Index 4 is reserved for a game layer if desired
+#define FUN      5
+#define DVORAK   6
+#define COLEMAK  7
+#define WORKMAN  8
 
 /*
  * Maintain the home–row modifier behaviour from the Totem keymap for the
@@ -34,7 +35,7 @@
     tapping-term-ms = <170>;
 };
 
-/ {
+{
     behaviors {
         /*
          * Home‑row mods matched to the Typeractive Corne.
@@ -77,19 +78,16 @@
         // Combos to toggle the Dvorak, Colemak and Workman layouts.  These
         // operate by toggling layers 6–8.  Two adjacent keys on the same row
         // are used for each combo.
-        
-        Dvorak {
-            bindings = <&tog 6>;
+        Dvorak_toggle {
+            bindings = <&tog DVORAK>;
             key-positions = <4 5>;
         };
-        
-        Colemak {
-            bindings = <&tog 7>;
+        Colemak_toggle {
+            bindings = <&tog COLEMAK>;
             key-positions = <14 15>;
         };
-        
-        workman {
-            bindings = <&tog 8>;
+        Workman_toggle {
+            bindings = <&tog WORKMAN>;
             key-positions = <25 26>;
         };
     };
@@ -130,13 +128,19 @@
                                 &kp DEL &kp TAB &mt &kp BSPACE &kp NUM   &kp SPACE &kp SHIFT &kp ENTER &kp ESC &trans
             >;
         };
-        // Number layer.  Retain the extra columns as transparent.
+        // Number layer.  Retain the extra columns as transparent.  This layer
+        // avoids undefined F‑keys and uses only F1–F10.  The top row provides
+        // digits 1–0; the middle row F1–F10; the bottom row provides the
+        // shifted symbols !, @, #, $, %, ^, &, *, (, ) via LS(Nx).
         num_layer {
             label = "NUM";
             bindings = <
+                // first row: numbers 1–0
                 &trans   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5   &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &trans
-                &trans   &kp F11  &kp F12  &kp F13  &kp F14  &kp F15  &kp F16  &kp F17  &kp F18  &kp F19  &kp F20  &trans
-                &trans   &kp LS(NUMBER_0) &kp LS(NUMBER_1) &kp LS(NUMBER_2) &kp LS(NUMBER_3) &kp LS(NUMBER_4) &kp LS(NUMBER_5) &kp LS(NUMBER_6) &kp LS(NUMBER_7) &kp LS(NUMBER_8) &kp LS(NUMBER_9) &trans
+                // second row: function keys F1–F10
+                &trans   &kp F1   &kp F2   &kp F3   &kp F4   &kp F5   &kp F6   &kp F7   &kp F8   &kp F9   &kp F10  &trans
+                // third row: shifted number symbols ( ! @ # $ % ^ & * ( ) )
+                &trans   &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)  &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
                                 &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
             >;
         };
@@ -160,43 +164,44 @@
                                 &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
             >;
         };
-        // function layer (index 5) – optional but required because Dvorak/Colemak/Workman follow it
+        // Function layer (layer index 5).  Only F1–F12 are defined here.  Extra
+        // positions fall through to underlying layers.  This avoids undefined
+        // F‑keys that can cause build errors.
         function {
             bindings = <
-                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F11
-                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans &kp F12
-                                    &trans &trans &trans    &trans &trans &trans
+                &trans   &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &trans
+                &trans   &kp F11 &kp F12 &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                                &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
         };
-        
-        // Dvorak layer (index 6)
+        // Dvorak layer.  Centre 10 positions are Dvorak; outer columns pass
+        // through from lower layers.
         Dvorak {
             bindings = <
-                &kp APOS &kp COMMA &kp DOT  &kp P  &kp Y  &kp F  &kp G  &kp C  &kp R  &kp L
-                &hml LEFT_GUI A  &hml LEFT_ALT O  &hml LEFT_CONTROL E  &hml LEFT_SHIFT U  &kp I  &kp D  &hmr RIGHT_SHIFT H  &hmr RIGHT_CONTROL T  &hmr RIGHT_ALT N  &hmr RIGHT_GUI S
-                &trans &kp SEMI &kp Q &kp J  &kp K  &kp X  &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
-                                    &trans  &trans  &trans  &trans
+                &trans   &kp APOS    &kp COMMA   &kp DOT     &kp P       &kp Y       &kp F     &kp G     &kp C     &kp R     &kp L     &trans
+                &trans   &hml LEFT_GUI A  &hml LEFT_ALT O  &hml LEFT_CONTROL E  &hml LEFT_SHIFT U  &kp I     &kp D     &hmr RIGHT_SHIFT H   &hmr RIGHT_CONTROL T  &hmr RIGHT_ALT N   &hmr RIGHT_GUI S &trans
+                &trans   &trans    &kp SEMI    &kp Q       &kp J       &kp K       &kp X     &kp B     &kp M     &kp W     &kp V     &kp Z     &trans
+                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
         };
-        
-        // Colemak layer (index 7)
+        // Colemak layer.  Only the central keys change; outer columns remain
+        // transparent.
         Colemak {
             bindings = <
-                &kp Q &kp W &kp F  &kp P  &kp G  &kp J  &kp L  &kp U  &kp Y  &kp SEMI
-                &hml LEFT_GUI A  &hml LEFT_CONTROL R  &hml LEFT_ALT S  &hml LEFT_SHIFT T  &kp D  &kp H  &hmr RIGHT_SHIFT N  &hmr RIGHT_CONTROL E  &hmr RIGHT_ALT I  &hmr RIGHT_GUI O
-                &trans &kp Z &kp X &kp C  &kp V  &kp B  &kp K  &kp M  &kp COMMA &kp DOT  &kp FSLH &trans
-                                    &trans &trans &trans &trans
+                &trans   &kp Q       &kp W       &kp F        &kp P        &kp G        &kp J      &kp L      &kp U      &kp Y      &kp SEMI     &trans
+                &trans   &hml LEFT_GUI A  &hml LEFT_CONTROL R  &hml LEFT_ALT S   &hml LEFT_SHIFT T  &kp D      &kp H      &hmr RIGHT_SHIFT N   &hmr RIGHT_CONTROL E   &hmr RIGHT_ALT I   &hmr RIGHT_GUI O   &trans
+                &trans   &trans    &kp Z       &kp X       &kp C        &kp V        &kp B      &kp K      &kp M      &kp COMMA  &kp DOT      &kp FSLH      &trans
+                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
         };
-        
-        // Workman layer (index 8)
+        // Workman layer.  Similar treatment as above.
         workman {
             bindings = <
-                &kp Q &kp D &kp R  &kp W  &kp B  &kp J  &kp F  &kp U  &kp P  &kp SEMI
-                &hml LEFT_GUI A  &hml LEFT_ALT S  &hml LEFT_CONTROL H  &hml LEFT_SHIFT T  &kp G  &kp Y  &hml RIGHT_SHIFT N  &hmr RIGHT_CONTROL E  &hmr RIGHT_ALT O  &hmr RIGHT_GUI I
-                &trans &kp Z &kp X &kp M  &kp C  &kp V  &kp K  &kp L  &kp COMMA &kp DOT  &kp FSLH &trans
-                                    &trans &trans &trans &trans
+                &trans   &kp Q       &kp D       &kp R        &kp W        &kp B        &kp J      &kp F      &kp U      &kp P      &kp SEMI    &trans
+                &trans   &hml LEFT_GUI A  &hml LEFT_ALT S   &hml LEFT_CONTROL H  &hml LEFT_SHIFT T  &kp G      &kp Y      &hmr RIGHT_SHIFT N   &hmr RIGHT_CONTROL E   &hmr RIGHT_ALT O   &hmr RIGHT_GUI I   &trans
+                &trans   &trans    &kp Z       &kp X       &kp M        &kp C        &kp V      &kp K      &kp L      &kp COMMA  &kp DOT      &kp FSLH      &trans
+                                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
         };
     };
